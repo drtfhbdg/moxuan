@@ -5,7 +5,7 @@ title = 'My First Post'
 
 categories = ["通用技术"] 
 
-tags = ["博客搭建", "Bilibili"] 
+tags = ["博客搭建"] 
 
 +++
 

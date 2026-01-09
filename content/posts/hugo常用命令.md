@@ -6,7 +6,7 @@ title = 'hugo常用命令'
 
 categories = ["通用技术"] 
 
-tags = ["博客搭建", "Bilibili"] 
+tags = ["博客搭建"] 
 
 +++
 
@@ -110,4 +110,6 @@ git commit -m "更新Hugo内容/样式"
 
 git push origin main
 ```
+
+- `hugo new content content/posts/xxxxx.md`
 

@@ -52,9 +52,9 @@ git clone https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke
 #####  创建新文章（最常用） 
 
 ```css
-# 创建一篇名为 "my-first-post" 的文章，默认格式为 markdown
+# 创建一篇名为 "xxxxxx" 的文章，默认格式为 markdown
 
-hugo new posts/my-first-post.md
+hugo new content content/posts/xxxxx.md
 
 # 自定义文章标题（推荐）
 
@@ -75,7 +75,7 @@ hugo new about.md
 
 #####  发布草稿文章 
 
-```
+```css
 # 方式1：直接编辑文章的 Front Matter，将 draft: true 改为 draft: false
 
 # 方式2：运行 Hugo 时强制渲染草稿

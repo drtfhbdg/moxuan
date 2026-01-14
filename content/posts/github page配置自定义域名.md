@@ -1,6 +1,6 @@
 +++
-date = '2026-01-10T00:13:00+08:00'
-draft = true
+date = '2024-11-11T18:54:34+08:00'
+draft = false
 title = 'Github page配置自定义域名'
 
 tags = ["博客搭建"]

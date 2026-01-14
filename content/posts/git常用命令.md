@@ -1,6 +1,6 @@
 +++
-date = '2026-01-11T18:54:34+08:00'
-draft = true
+date = '2024-12-01T18:54:34+08:00'
+draft = false
 title = 'Git常用命令'
 
 tags = ["博客搭建"] 

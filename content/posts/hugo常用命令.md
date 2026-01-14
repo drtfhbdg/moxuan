@@ -1,10 +1,8 @@
 +++
 
-date = '2026-01-08T10:18:50+08:00'
-draft = true
+date = '2024-11-13 8T10:18:50+08:00'
+draft = false
 title = 'hugo常用命令'
-
-categories = ["通用技术"] 
 
 tags = ["博客搭建"] 
 

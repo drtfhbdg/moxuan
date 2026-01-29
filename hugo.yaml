@@ -4,7 +4,7 @@
 #baseURL: "https://drtfhbdg.github.io/Moxuan/" # 主站的 URL
 baseURL: "https://blog.moxuan.de/" # 主站的 URL
 title: Moxuan's Blog # 站点标题
-copyright: "[©2024-2026 Moxuan's Blog](https://blog.moxuan.de/)" # 网站的版权声明，通常显示在页脚
+copyright: "[©2024-2026 moxuan](https://blog.moxuan.de/)" # 网站的版权声明，通常显示在页脚
 theme: PaperMod # 主题
 languageCode: zh-cn # 语言
 

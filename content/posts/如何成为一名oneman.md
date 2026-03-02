@@ -3,6 +3,8 @@ date = '2026-02-08T19:05:05+08:00'
 draft = false
 title = '如何成为一名oneman'
 
+tags = ["vps"]
+
 +++
 
 ## 第一步：购买 Contabo VPS

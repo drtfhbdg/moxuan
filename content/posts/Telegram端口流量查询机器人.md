@@ -3,6 +3,8 @@ date = '2026-02-22T16:45:28+08:00'
 draft = false
 title = 'Telegram端口流量查询机器人'
 
+tags = ["vps"]
+
 +++
 
 # 告别臃肿面板！手写一个极简 Telegram 端口流量查询机器人

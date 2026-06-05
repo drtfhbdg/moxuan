@@ -1,5 +1,5 @@
 +++
-date = '2024-12-01T18:54:34+08:00'
+date = '2023-12-01T18:54:34+08:00'
 draft = false
 title = 'Git常用命令'
 
@@ -211,7 +211,7 @@ git push -f origin main
 
 ### 1️⃣ Git 仓库乱了，想重新来
 
-```
+```shell
 rd /s /q .git
 git init
 git add .
@@ -241,7 +241,7 @@ git commit -m "重新初始化仓库"
 
 ❗ **一定要在正确目录执行**
 
-```
+```shell
 dir
 ```
 
@@ -254,7 +254,7 @@ dir
 
 ### 重新推送到 GitHub
 
-```
+```shell
 git init
 git branch -M main
 git remote add origin https://github.com/用户名/仓库名.git

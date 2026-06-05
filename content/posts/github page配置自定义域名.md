@@ -1,5 +1,5 @@
 +++
-date = '2024-11-11T18:54:34+08:00'
+date = '2023-11-11T18:54:34+08:00'
 draft = false
 title = 'Github page配置自定义域名'
 
@@ -16,19 +16,19 @@ tags = ["博客搭建"]
 
 一般是你之前运行过：
 
-```
+```shell
 hugo server
 ```
 
 的那个目录，例如（示例）：
 
-```
+```shell
 D:\hugo\mingyue\
 ```
 
 你可以看到里面有这些目录之一：
 
-```
+```shell
 archetypes
 content
 layouts
@@ -45,7 +45,7 @@ config.toml / hugo.yaml
 
 1. 进入：
 
-   ```
+   ```shell
    D:\hugo\mingyue\static\
    ```
 
@@ -53,7 +53,7 @@ config.toml / hugo.yaml
 
 3. 重命名为：
 
-   ```
+   ```shell
    CNAME
    ```
 
@@ -68,7 +68,7 @@ config.toml / hugo.yaml
 
 用记事本打开 `CNAME`，内容 **只写这一行**：
 
-```
+```shell
 blog.moxuan.de
 ```
 
@@ -84,13 +84,13 @@ blog.moxuan.de
 
 回到 Hugo 项目根目录，在终端执行：
 
-```
+```powershell
 hugo
 ```
 
 执行完成后，检查：
 
-```HTML
+```shell
 public/CNAME
 ```
 
@@ -105,13 +105,13 @@ public/CNAME
 
 ### 1️⃣ 查看 git 状态
 
-```
+```shell
 git status
 ```
 
 你应该能看到类似：
 
-```
+```shell
 new file: static/CNAME
 new file: public/CNAME
 ```
@@ -120,7 +120,7 @@ new file: public/CNAME
 
 ### 2️⃣ 提交并推送
 
-```
+```shell
 git add .
 git commit -m "Add CNAME for custom domain"
 git push
@@ -132,7 +132,7 @@ git push
 
 1. 打开：
 
-   ```
+   ```shell
    仓库 → Settings → Pages
    ```
 
@@ -140,7 +140,7 @@ git push
 
 3. 重新输入：
 
-   ```
+   ```shell
    blog.moxuan.de
    ```
 

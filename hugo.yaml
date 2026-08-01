@@ -52,11 +52,11 @@ languages:
 # 主题的配置(基本上是)
 # ~~~~~~~~~
 pagination:
-  paginate: 8 # 每页展示的文章数量，这个没找到文档，应该是主题自己设置的
+  pagerSize: 8 # 每页展示的文章数量。Hugo 0.128+ 用 pagerSize，旧名 paginate 已失效（会静默回落到默认 10）
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  description: "Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"
+  description: "一个普通大学生的技术笔记，记录 Linux 运维、Web 开发和服务器踩坑的日常。内容涵盖 Nginx、Docker、MySQL、Cloudflare 和自建服务的实践经验。"
   author: Moxuan
   defaultTheme: light # 默认是暗色背景
   ShowShareButtons: false # 关闭分享的按钮
@@ -69,7 +69,7 @@ params:
   ShowAllPagesInArchive: true # 在归档页面展示所有的页面
   ShowPageNums: true # 展示页面的页数
   ShowToc: true # 展示文章详情页的目录
-  comments: true # 评论
+  comments: false # 评论。想开启：解开下面 giscus 配置的注释，并把这里改成 true
   images: ["https://i.postimg.cc/7hwBy7VS/calcr.png"] # 缺省的图片，比如，博客的封面
   DateFormat: "2006-01-02" # 这个时间是作者自己写的，只能这样写
   UseHugoToc: true
@@ -111,12 +111,14 @@ params:
       keys: ["title", "permalink", "summary", "content"]
       includeMatches: true
   # 设置网站的标签页的图标，即 favicon
+  # 各尺寸图标由 scripts/resize-favicon.ps1 从 assets/favicon-source.png 生成。
+  # 以前这五项都指向同一张 1024x1024 / 1.38MB 的 PNG，每个页面都要加载。
   assets:
       favicon: "favicon.png"
-      favicon16x16: "favicon.png"
-      favicon32x32: "favicon.png"
-      apple_touch_icon: "favicon.png"
-      safari_pinned_tab: "favicon.png"
+      favicon16x16: "favicon-16x16.png"
+      favicon32x32: "favicon-32x32.png"
+      apple_touch_icon: "apple-touch-icon.png"
+      safari_pinned_tab: "favicon-32x32.png" # 严格来说这个位置要单色 SVG，Safari 会忽略 PNG；指过来只是为了不 404
       disableHLJS: true
 
   # 页脚备案号

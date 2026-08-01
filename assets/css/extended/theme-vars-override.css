@@ -24,6 +24,12 @@
     --accent-hover: #4338ca;
     --accent-light: #e0e7ff;
     --link-color: var(--accent);
+
+    /* RGB 三元组，供 rgba() 使用。
+       注意：rgba(var(--accent), .4) 这种写法无效，因为 --accent 存的是 #4f46e5，
+       不是 79, 70, 229。需要透明度时用下面这组 *-rgb 变量。 */
+    --theme-rgb: 250, 250, 250;
+    --accent-rgb: 79, 70, 229;
 }
 
 html[data-theme="dark"] {
@@ -43,4 +49,8 @@ html[data-theme="dark"] {
     --accent-hover: #60a5fa;
     --accent-light: rgba(56, 189, 248, 0.15);
     --link-color: var(--accent);
+
+    /* RGB 三元组，供 rgba() 使用 */
+    --theme-rgb: 15, 23, 42;
+    --accent-rgb: 56, 189, 248;
 }

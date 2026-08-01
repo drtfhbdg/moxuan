@@ -108,7 +108,7 @@ html[data-theme="dark"] .profile .button:hover {
    ===================================================== */
 
 .nav {
-  background: rgba(var(--theme), 0.75);
+  background: rgba(var(--theme-rgb), 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -315,7 +315,7 @@ html[data-theme="dark"] .pagination .current {
   text-decoration: underline;
   text-decoration-thickness: 1.5px;
   text-underline-offset: 3px;
-  text-decoration-color: rgba(var(--link-color), 0.3);
+  text-decoration-color: rgba(var(--accent-rgb), 0.4);
 }
 
 .post-content a:hover {
@@ -510,7 +510,7 @@ html[data-theme="dark"] .copy-code:hover {
     width: 0%;
     z-index: 1000;
     transition: width 0.1s linear;
-    box-shadow: 0 0 10px rgba(var(--accent), 0.4);
+    box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.5);
 }
 
 /* =====================================================
@@ -540,15 +540,17 @@ html[data-theme="dark"] .medium-zoom-overlay {
   background: rgba(15, 23, 42, 0.9) !important;
 }
 
+/* 路径相对于编译后的 stylesheet（/assets/css/stylesheet.<hash>.css），
+   ../../cursors/ 即 static/cursors/，不受 baseURL 子目录影响 */
 .win11 {
   .medium-zoom-image {
-    cursor: url(../../static/cursors/zoom-in.svg), default !important;
+    cursor: url(../../cursors/zoom-in.svg) 12 12, zoom-in !important;
   }
   .medium-zoom--opened .medium-zoom-overlay {
-    cursor: url(../../static/cursors/zoom-out.svg), default !important;
+    cursor: url(../../cursors/zoom-out.svg) 12 12, zoom-out !important;
   }
   .medium-zoom-image--opened {
-    cursor: url(../../static/cursors/zoom-out.svg), default !important;
+    cursor: url(../../cursors/zoom-out.svg) 12 12, zoom-out !important;
   }
 }
 

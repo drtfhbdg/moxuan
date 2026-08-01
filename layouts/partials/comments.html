@@ -1,3 +1,7 @@
+{{- /* 只有 giscus 配置完整时才渲染评论区。
+       以前这里没有守卫：params.comments 为 true 而 giscus 配置被注释掉时，
+       会给每篇文章插入一个 data-repo="" 的 giscus 脚本，请求失败后留下一个空虚线框。 */ -}}
+{{- if and site.Params.giscus.repo site.Params.giscus.repoId }}
 <div id="tw-comment"></div>
 <script>
     // 默认是暗色，根目录下的配置中的主题默认也是暗色
@@ -47,3 +51,4 @@
         }
     });
 </script>
+{{- end }}

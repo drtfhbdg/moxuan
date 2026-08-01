@@ -1,6 +1,6 @@
 +++
 date = '2025-02-08T19:05:05+08:00'
-draft = false
+draft = true
 title = '如何成为一名oneman'
 
 tags = ["vps"]

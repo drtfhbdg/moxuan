@@ -85,7 +85,7 @@
 /* GenericUnderline */ .chroma .gl { text-decoration:underline }
 /* TextWhitespace */ .chroma .w { color: #000 }
 
-.dark {
+html[data-theme="dark"] {
   /* Background */ .bg { color:#e6edf3;background-color:#0d1117; }
   /* PreWrapper */ .chroma { color:#e6edf3;background-color:#0d1117; }
   /* Other */ .chroma .x { color: #fff }

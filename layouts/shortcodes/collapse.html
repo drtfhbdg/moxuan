@@ -1,0 +1,72 @@
+{{- /* 折叠内容 shortcode */ -}}
+{{- /* 使用方法: {{< collapse "点击展开" >}}隐藏的内容{{< /collapse >}} */ -}}
+
+{{ $summary := .Get 0 | default "点击展开" }}
+
+<details class="collapse-box">
+    <summary class="collapse-summary">
+        <span class="collapse-icon">▶</span>
+        <span class="collapse-title">{{ $summary }}</span>
+    </summary>
+    <div class="collapse-content">
+        {{ .Inner | markdownify }}
+    </div>
+</details>
+
+<style>
+.collapse-box {
+    margin: 1.5em 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--entry);
+}
+
+.collapse-summary {
+    padding: 1em 1.5em;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--theme);
+    transition: all 0.2s ease;
+}
+
+.collapse-summary:hover {
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
+.collapse-icon {
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+
+.collapse-box[open] .collapse-icon {
+    transform: rotate(90deg);
+}
+
+.collapse-title {
+    flex: 1;
+}
+
+.collapse-content {
+    padding: 1.5em;
+    border-top: 1px solid var(--border);
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>

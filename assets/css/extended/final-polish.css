@@ -1,0 +1,298 @@
+/* ============================================
+   最终润色 - 细节优化
+   ============================================ */
+
+/* ============================================
+   目录优化
+   ============================================ */
+
+.toc li {
+    position: relative;
+    padding-left: 1em;
+}
+
+.toc li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.toc li:hover::before {
+    opacity: 1;
+}
+
+.toc li a {
+    display: block;
+    padding: 0.4em 0;
+    border-radius: 6px;
+    padding-left: 0.5em;
+    transition: all 0.2s ease;
+}
+
+.toc li a:hover {
+    background: var(--accent-light);
+    padding-left: 0.75em;
+}
+
+/* 平滑滚动在 feature-enhancements.css 里连同 scroll-padding-top 一起定义 */
+
+/* ============================================
+   选中文本的颜色
+   ============================================ */
+
+::selection {
+    background: var(--accent);
+    color: white;
+}
+
+::-moz-selection {
+    background: var(--accent);
+    color: white;
+}
+
+/* 首页头像样式在 clean-minimal.css。
+   原来这里的 scale(1.08) rotate(3deg) 是给大头像写的，
+   现在头像只有 56px，放大加旋转会糊，去掉。 */
+
+/* 导航栏阴影跟着毛玻璃背景一起放在 blank.css 的 header.header 上，
+   加在 .nav 上只会是中间一条，两端断开。 */
+
+/* ============================================
+   文章卡片标题链接优化
+   ============================================ */
+
+.post-entry .entry-header h2 a,
+.first-entry .entry-header h2 a {
+    text-decoration: none;
+    background: linear-gradient(to right, var(--accent), var(--accent)) no-repeat;
+    background-size: 0% 2px;
+    background-position: left bottom;
+    transition: background-size 0.3s ease;
+}
+
+.post-entry:hover .entry-header h2 a,
+.first-entry:hover .entry-header h2 a {
+    background-size: 100% 2px;
+}
+
+/* #top-link 和 .copy-code 的样式统一在 feature-enhancements.css，
+   这里原来是几乎一样的重复定义 */
+
+/* ============================================
+   标签云页面优化
+   ============================================ */
+
+.terms-tags a {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.terms-tags a:hover {
+    transform: scale(1.1);
+}
+
+/* ============================================
+   文章元信息图标
+   ============================================ */
+
+.post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25em;
+    align-items: center;
+    font-size: 0.9em;
+    color: var(--secondary);
+    margin: 1.5em 0;
+}
+
+.post-meta > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+}
+
+/* ============================================
+   加载动画优化
+   ============================================ */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.post-entry,
+.first-entry {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.post-entry:nth-child(1) { animation-delay: 0s; }
+.post-entry:nth-child(2) { animation-delay: 0.05s; }
+.post-entry:nth-child(3) { animation-delay: 0.1s; }
+.post-entry:nth-child(4) { animation-delay: 0.15s; }
+.post-entry:nth-child(5) { animation-delay: 0.2s; }
+.post-entry:nth-child(6) { animation-delay: 0.25s; }
+.post-entry:nth-child(7) { animation-delay: 0.3s; }
+.post-entry:nth-child(8) { animation-delay: 0.35s; }
+
+/* ============================================
+   键盘快捷键提示样式
+   ============================================ */
+
+kbd {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.2em 0.5em;
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    box-shadow: 0 2px 0 var(--border);
+    display: inline-block;
+    font-weight: 600;
+}
+
+/* ============================================
+   文章内容细节优化
+   ============================================ */
+
+.post-content strong {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.post-content em {
+    font-style: italic;
+    color: var(--secondary);
+}
+
+.post-content mark {
+    background: var(--accent-light);
+    color: var(--primary);
+    padding: 0.1em 0.3em;
+    border-radius: 4px;
+}
+
+/* 删除线 */
+.post-content del {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+/* ============================================
+   脚注样式优化
+   ============================================ */
+
+.post-content .footnotes {
+    margin-top: 3em;
+    padding-top: 2em;
+    border-top: 2px solid var(--border);
+    font-size: 0.9em;
+    color: var(--secondary);
+}
+
+.post-content .footnotes ol {
+    padding-left: 2em;
+}
+
+.post-content .footnotes li {
+    margin: 1em 0;
+}
+
+/* 脚注链接 */
+.post-content sup a {
+    color: var(--accent);
+    font-weight: 700;
+    text-decoration: none;
+    padding: 0 0.2em;
+}
+
+/* ============================================
+   响应式图片容器
+   ============================================ */
+
+.post-content figure {
+    margin: 2em 0;
+}
+
+.post-content figcaption {
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--secondary);
+    margin-top: 0.75em;
+    font-style: italic;
+}
+
+/* ============================================
+   移动端优化
+   ============================================ */
+
+@media (max-width: 768px) {
+    .profile img:hover {
+        transform: scale(1.05);
+    }
+
+    .post-entry,
+    .first-entry {
+        animation: none; /* 移动端取消进入动画 */
+    }
+
+    #top-link {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+/* ============================================
+   打印样式优化
+   ============================================ */
+
+@media print {
+    .nav,
+    .footer,
+    #top-link,
+    .paginav,
+    .post-tags,
+    .share-buttons {
+        display: none !important;
+    }
+
+    .post-content a {
+        text-decoration: underline;
+        color: #000;
+    }
+
+    .post-content a[href^="http"]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #666;
+    }
+}
+
+/* ============================================
+   暗色模式特定优化
+   ============================================ */
+
+/* 原来这里写成了 html[data-theme="dark"] { .post-title { ... } } 这种嵌套形式。
+   Hugo 只做拼接和压缩，不跑 Sass，原生 CSS 嵌套在旧浏览器里整块失效，
+   所以这几条以前根本没生效。改成平铺写法。 */
+html[data-theme="dark"] .post-title,
+html[data-theme="dark"] .entry-header h2 {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .post-content pre {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 卡片 hover 阴影在 blank.css 里已有暗色版本，不再重复 */
+
+/* 说明：原来这里给 .post-entry 等常驻加了 will-change: transform，
+   等于让浏览器一直为每张卡片保留合成层，页面卡片一多反而更慢。
+   will-change 应该只在即将变化前短暂加上，这里直接去掉。 */

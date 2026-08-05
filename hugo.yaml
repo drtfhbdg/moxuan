@@ -44,9 +44,9 @@ languages:
         - name: 搜索
           pageRef: search/
           weight: 20
-        # - name: 关于
-          # pageRef: about/
-          # weight: 21
+        - name: 关于
+          pageRef: about/
+          weight: 21
 
 # ~~~~~~~~~
 # 主题的配置(基本上是)

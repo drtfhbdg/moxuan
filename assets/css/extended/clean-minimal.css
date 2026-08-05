@@ -1,0 +1,160 @@
+/* ============================================
+   首页 profile 卡片
+   这里是首页头像/标题/简介/社交图标的唯一定义处。
+   blank.css、final-polish.css、components-enhancement.css 里
+   原来都有各自的一份，已清掉，改样式只改这个文件。
+   ============================================ */
+
+/* 关键：主题的 profile-mode.css 里写的是
+     .main .profile { min-height: calc(100vh - ...) }
+   选择器权重比裸 .profile 高，光写 .profile{...!important} 盖不住 min-height，
+   首页顶部那一大片空白就是它撑出来的。所以这里必须同样用 .main .profile。 */
+.main .profile {
+    display: block;
+    min-height: 0;
+    align-items: initial;
+    justify-content: initial;
+    text-align: left;
+    max-width: var(--main-width);
+    margin: 0 auto;
+    padding: 1.5em 0;
+}
+
+/* 三列网格：头像 | 标题+简介 | 社交图标
+   原来用 flex 直接排 4 个平级子元素，标题和简介会各占一列，
+   标题被挤成很窄一条然后折行。用 grid 显式指定位置，标题和简介才能上下叠在同一列。 */
+.main .profile .profile_inner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    column-gap: 1em;
+    row-gap: 0.15em;
+    text-align: left;
+}
+
+.main .profile .profile_inner img {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    margin: 0;
+    /* 覆盖主题 zmedia.css 里移动端的 transform: scale(0.85) */
+    transform: none;
+}
+
+.main .profile .profile_inner h1 {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.3;
+    color: var(--primary);
+    /* 标题不折行，宽度不够时才让 grid 去压缩简介那一行 */
+    white-space: nowrap;
+}
+
+/* 注意：partial 里输出的是裸 <span>，不是 .subtitle。
+   之前这里写 .subtitle 所以整条规则从来没生效过。 */
+.main .profile .profile_inner > span {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 0.9rem;
+    color: var(--secondary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.main .profile .social-icons {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    display: flex;
+    gap: 0.5em;
+    margin: 0;
+    justify-content: flex-end;
+}
+
+.main .profile .social-icons a {
+    width: 34px;
+    height: 34px;
+    /* 主题给 .social-icons a 加了 padding: 10px，不清掉的话
+       34px 的盒子里只剩 14px 放图标，图标会被压成一条看不见的细线 */
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--secondary);
+    transition: color 0.2s ease, background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+/* 同样要盖掉主题的 svg { height: 26px; width: 26px }，
+   26px 塞进 34px 的框里太满，看着像个色块 */
+.main .profile .social-icons a svg {
+    width: 18px;
+    height: 18px;
+}
+
+.main .profile .social-icons a:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+html[data-theme="dark"] .main .profile .social-icons a:hover {
+    color: var(--theme);
+}
+
+/* buttons 已在 hugo.yaml 的 profileMode 里移除，这里兜底隐藏 */
+.main .profile .buttons {
+    display: none;
+}
+
+/* profile 和下方文章列表之间加一条分隔 */
+.main .profile {
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.5em;
+}
+
+/* ============================================
+   窄屏：图标掉到第二行，头像跨三行
+   ============================================ */
+
+@media (max-width: 768px) {
+    .main .profile {
+        padding: 1em 0;
+    }
+
+    .main .profile .profile_inner {
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-rows: auto auto auto;
+    }
+
+    .main .profile .profile_inner img {
+        grid-row: 1 / span 3;
+        align-self: start;
+        width: 48px;
+        height: 48px;
+    }
+
+    .main .profile .profile_inner h1 {
+        font-size: 1.15rem;
+        /* 窄屏宽度实在不够，允许折行，否则会溢出 */
+        white-space: normal;
+    }
+
+    .main .profile .social-icons {
+        grid-column: 2;
+        grid-row: 3;
+        justify-content: flex-start;
+        margin-top: 0.5em;
+    }
+}

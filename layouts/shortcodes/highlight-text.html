@@ -1,0 +1,35 @@
+{{- /* 高亮文本 shortcode */ -}}
+{{- /* 使用方法: {{< highlight-text "yellow" >}}重要内容{{< /highlight-text >}} */ -}}
+{{- /* 颜色: yellow, blue, green, red, purple */ -}}
+
+{{ $color := .Get 0 | default "yellow" }}
+
+<span class="highlight-text highlight-{{ $color }}">{{ .Inner }}</span>
+
+<style>
+.highlight-text {
+    padding: 0.2em 0.5em;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.highlight-yellow {
+    background: linear-gradient(180deg, transparent 60%, rgba(253, 224, 71, 0.4) 60%);
+}
+
+.highlight-blue {
+    background: linear-gradient(180deg, transparent 60%, rgba(56, 189, 248, 0.4) 60%);
+}
+
+.highlight-green {
+    background: linear-gradient(180deg, transparent 60%, rgba(34, 197, 94, 0.4) 60%);
+}
+
+.highlight-red {
+    background: linear-gradient(180deg, transparent 60%, rgba(239, 68, 68, 0.4) 60%);
+}
+
+.highlight-purple {
+    background: linear-gradient(180deg, transparent 60%, rgba(168, 85, 247, 0.4) 60%);
+}
+</style>

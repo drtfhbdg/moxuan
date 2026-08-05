@@ -1,12 +1,22 @@
+/* 布局变量的唯一定义处。
+   不要在其它文件里再写 --nav-width / --main-width 之类的，
+   之前 blank.css 里另有一份 --nav-width: 1380px，靠文件名顺序决定谁生效，很难排查。 */
 :root {
     --gap: 24px;
     --content-gap: 20px;
     --nav-width: 1280px;
     --main-width: 760px;
+    /* 必须和 .nav 的 line-height 实际高度一致：
+       主题用 --header-height 算 .main 和首页 profile 的 min-height，
+       这里填错的话整页留白都会算错。所以 .nav 上不要再加 padding。 */
     --header-height: 60px;
     --footer-height: 60px;
     --radius: 16px;
     --radius-sm: 8px;
+
+    /* 文章页目录（TOC）布局 */
+    --article-width: 650px;
+    --toc-width: 300px;
 
     /* Light mode palette - Indigo accent */
     --theme: #fafafa;
@@ -34,14 +44,14 @@
 
 html[data-theme="dark"] {
     /* Dark mode palette - Deep blue/black with sky accent */
-    --theme: #0f172a;
-    --entry: #1e293b;
+    --theme: #0a0d12;
+    --entry: #0f131c;
     --primary: #f8fafc;
     --secondary: #94a3b8;
     --tertiary: #334155;
     --content: #e2e8f0;
-    --code-block-bg: #1e1e2e;
-    --code-bg: #1e1e2e;
+    --code-block-bg: #161d2b;
+    --code-bg: #1e2636;
     --border: rgba(255, 255, 255, 0.08);
 
     /* Accent colors */
@@ -51,6 +61,6 @@ html[data-theme="dark"] {
     --link-color: var(--accent);
 
     /* RGB 三元组，供 rgba() 使用 */
-    --theme-rgb: 15, 23, 42;
+    --theme-rgb: 10, 13, 18;
     --accent-rgb: 56, 189, 248;
 }

@@ -1,0 +1,86 @@
+/* ============================================
+   主题切换按钮 / 导航栏局部
+   #theme-toggle 的样式只在这个文件里定义。
+   blank.css 和 feature-enhancements.css 里原来各有一份，
+   三处的 transform 互相覆盖（15deg vs 180deg），已清掉。
+   重复定义清掉后就不需要 !important 了。
+   ============================================ */
+
+#theme-toggle {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    background: transparent;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    transition: background-color 0.3s ease, border-color 0.3s ease,
+        color 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#theme-toggle:hover {
+    background: var(--accent-light);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: rotate(180deg);
+}
+
+#theme-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* 主题默认给这两个按钮留了圆形阴影，和这里的方形描边风格不搭 */
+.top-link,
+#theme-toggle {
+    box-shadow: none;
+}
+
+/* Logo 区域优化 */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.logo a {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.logo a:hover {
+    color: var(--accent);
+}
+
+/* 菜单按钮优化 */
+#menu {
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
+}
+
+/* 移动端菜单按钮 */
+#menu-trigger {
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--primary);
+    transition: all 0.2s ease;
+}
+
+#menu-trigger:hover {
+    background: var(--accent-light);
+    border-color: var(--accent);
+    color: var(--accent);
+}

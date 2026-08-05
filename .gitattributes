@@ -1,0 +1,14 @@
+# 统一换行符为 LF，避免在 Windows 上编辑后整个文件显示为改动
+* text=auto eol=lf
+
+# 二进制文件不做换行符转换
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.pdf binary

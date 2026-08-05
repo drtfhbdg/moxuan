@@ -1,0 +1,408 @@
+/* ============================================
+   文章排版全面优化
+   ============================================ */
+
+/* 字体优化 */
+:root {
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+    --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+    --font-size-base: clamp(16px, 1vw + 14px, 18px);
+    --line-height-relaxed: 1.75;
+    --line-height-tight: 1.3;
+}
+
+/* 全局字体设置 */
+body {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+}
+
+/* ============================================
+   文章内容区域优化
+   ============================================ */
+
+.post-content {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--content);
+}
+
+/* 段落间距 */
+.post-content p {
+    margin: 1.5em 0;
+    line-height: var(--line-height-relaxed);
+}
+
+.post-content p:first-child {
+    margin-top: 0;
+}
+
+/* ============================================
+   标题层次优化
+   ============================================ */
+
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+    font-weight: 700;
+    line-height: var(--line-height-tight);
+    color: var(--primary);
+    margin-top: 2.5em;
+    margin-bottom: 1em;
+    letter-spacing: -0.02em;
+    position: relative;
+}
+
+.post-content h1 {
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    margin-top: 0;
+}
+
+.post-content h2 {
+    font-size: clamp(1.75rem, 2.5vw, 2rem);
+    padding-bottom: 0.5em;
+    border-bottom: 2px solid var(--border);
+}
+
+.post-content h2::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 48px;
+    height: 2px;
+    background: var(--accent);
+}
+
+.post-content h3 {
+    font-size: clamp(1.375rem, 2vw, 1.625rem);
+    color: var(--primary);
+}
+
+.post-content h3::before {
+    content: "# ";
+    color: var(--accent);
+    margin-right: 0.25em;
+    font-weight: 600;
+}
+
+.post-content h4 {
+    font-size: clamp(1.125rem, 1.5vw, 1.25rem);
+}
+
+/* ============================================
+   代码块美化
+   ============================================ */
+
+.post-content code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    font-weight: 500;
+}
+
+/* 行内代码 */
+.post-content p code,
+.post-content li code,
+.post-content td code {
+    background: var(--code-bg);
+    color: var(--accent);
+    padding: 0.2em 0.5em;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+/* 代码块容器 */
+.post-content pre {
+    background: var(--code-block-bg) !important;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25em 1.5em;
+    overflow-x: auto;
+    margin: 2em 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    position: relative;
+}
+
+html[data-theme="dark"] .post-content pre {
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+}
+
+.post-content pre code {
+    background: none !important;
+    color: inherit;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    font-size: 0.9em;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+/* 代码块滚动条 */
+.post-content pre::-webkit-scrollbar {
+    height: 8px;
+}
+
+.post-content pre::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+.post-content pre::-webkit-scrollbar-thumb {
+    background: var(--tertiary);
+    border-radius: 4px;
+}
+
+.post-content pre::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
+
+/* ============================================
+   引用块优化
+   ============================================ */
+
+.post-content blockquote {
+    margin: 2em 0;
+    padding: 1.25em 1.5em;
+    border-left: 4px solid var(--accent);
+    background: var(--accent-light);
+    border-radius: 0 8px 8px 0;
+    position: relative;
+}
+
+.post-content blockquote p {
+    margin: 0.75em 0;
+    color: var(--primary);
+}
+
+.post-content blockquote p:first-child {
+    margin-top: 0;
+}
+
+.post-content blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+/* 引用块图标 */
+.post-content blockquote::before {
+    content: """;
+    position: absolute;
+    left: 0.75em;
+    top: 0.25em;
+    font-size: 2.5em;
+    color: var(--accent);
+    opacity: 0.3;
+    font-family: Georgia, serif;
+    line-height: 1;
+}
+
+/* ============================================
+   列表优化
+   ============================================ */
+
+.post-content ul,
+.post-content ol {
+    margin: 1.5em 0;
+    padding-left: 2em;
+}
+
+.post-content li {
+    margin: 0.75em 0;
+    line-height: var(--line-height-relaxed);
+}
+
+.post-content ul > li::marker {
+    color: var(--accent);
+}
+
+.post-content ol > li::marker {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* 嵌套列表 */
+.post-content li > ul,
+.post-content li > ol {
+    margin: 0.5em 0;
+}
+
+/* ============================================
+   链接优化
+   ============================================ */
+
+.post-content a {
+    color: var(--link-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.post-content a:hover {
+    color: var(--accent-hover);
+    border-bottom-color: var(--accent-hover);
+}
+
+/* 标题中的链接 */
+.post-content h1 a,
+.post-content h2 a,
+.post-content h3 a,
+.post-content h4 a {
+    border-bottom: none;
+    font-weight: inherit;
+}
+
+/* ============================================
+   表格优化
+   ============================================ */
+
+.post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2em 0;
+    font-size: 0.95em;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.post-content th {
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.875em 1em;
+}
+
+.post-content td {
+    padding: 0.875em 1em;
+    border-bottom: 1px solid var(--border);
+}
+
+.post-content tr:last-child td {
+    border-bottom: none;
+}
+
+.post-content tbody tr {
+    background: var(--entry);
+    transition: background 0.2s ease;
+}
+
+.post-content tbody tr:hover {
+    background: var(--accent-light);
+}
+
+/* ============================================
+   图片优化
+   ============================================ */
+
+.post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin: 2em auto;
+    display: block;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme="dark"] .post-content img {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================
+   分隔线
+   ============================================ */
+
+.post-content hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right,
+        transparent,
+        var(--border) 20%,
+        var(--border) 80%,
+        transparent
+    );
+    margin: 3em 0;
+}
+
+/* ============================================
+   首页文章列表优化
+   ============================================ */
+
+/* 首页文章卡片（.post-entry / .first-entry / .entry-header h2）的样式
+   统一在 blank.css。原来这里另有一份，圆角 12px、标题 clamp 到 1.5rem，
+   和那边的 var(--radius) 16px、1.2rem 打架。 */
+
+/* ============================================
+   目录优化
+   ============================================ */
+
+.toc {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25em 1.5em;
+}
+
+.toc-title {
+    font-weight: 700;
+    font-size: 1.1em;
+    color: var(--primary);
+    margin-bottom: 1em;
+}
+
+.toc ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.toc li {
+    margin: 0.5em 0;
+}
+
+.toc a {
+    color: var(--secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-block;
+    padding: 0.25em 0;
+}
+
+.toc a:hover {
+    color: var(--accent);
+    transform: translateX(4px);
+}
+
+/* ============================================
+   响应式优化
+   ============================================ */
+
+@media (max-width: 768px) {
+    .post-content {
+        font-size: 16px;
+    }
+
+    .post-content pre {
+        padding: 1em;
+        margin: 1.5em -1em;
+        border-radius: 8px;
+    }
+
+    .post-content h2,
+    .post-content h3,
+    .post-content h4 {
+        margin-top: 2em;
+    }
+
+    .post-content blockquote {
+        margin-left: -0.5em;
+        margin-right: -0.5em;
+        padding: 1em 1.25em;
+    }
+}

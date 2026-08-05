@@ -6,9 +6,11 @@
   --link-color: var(--accent);
 }
 
+/* 字号和行高由 article-enhancement.css 用 --font-size-base（clamp 响应式）设定。
+   这里原来又写了一遍 font-size: 1rem / line-height: 1.7，
+   因为 blank.css 排在 article-enhancement.css 后面，
+   把那边的响应式字号盖成了固定 16px，等于白写。 */
 body {
-  font-size: 1rem;
-  line-height: 1.7;
   word-break: break-word;
   background: var(--theme);
   color: var(--content);
@@ -32,87 +34,33 @@ code {
   line-height: 1.5;
 }
 
-/* =====================================================
-   Homepage Profile
-   ===================================================== */
-
-.profile {
-  text-align: center;
-  padding: 2rem 1rem;
-}
-
-.profile img {
-  border-radius: 50%;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 3px solid var(--entry);
-}
-
-.profile img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
-}
-
-.profile .profile_inner h1 {
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin: 1rem 0 0.5rem;
-  color: var(--primary);
-}
-
-.profile .profile_inner span {
-  color: var(--secondary);
-  font-size: 1.1rem;
-  line-height: 1.6;
-}
-
-.profile .button {
-  background: var(--accent);
-  color: #fff;
-  border-radius: 9999px;
-  padding: 0.6rem 1.4rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
-}
-
-.profile .button:hover {
-  background: var(--accent-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.35);
-}
-
-html[data-theme="dark"] .profile .button {
-  background: var(--accent);
-  color: #0f172a;
-  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.25);
-}
-
-html[data-theme="dark"] .profile .button:hover {
-  background: var(--accent-hover);
-  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.35);
-}
-
-.social-icons a {
-  color: var(--secondary);
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.social-icons a:hover {
-  color: var(--accent);
-  transform: translateY(-3px);
-}
+/* 首页 profile 和社交图标的样式统一放在 clean-minimal.css，
+   这里不要重复定义，之前 .profile img / .social-icons a 在多个文件里各写一遍，
+   互相覆盖导致头像和图标尺寸对不上。 */
 
 /* =====================================================
    Header / Navigation Glassmorphism
    ===================================================== */
 
-.nav {
+/* 毛玻璃背景要放在 header 上，不能放 .nav。
+   .nav 被主题限制了 max-width: nav-width，背景加在它上面会变成
+   页面中间一条悬浮的白色卡片，两侧露出底色。 */
+header.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   background: rgba(var(--theme-rgb), 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* 不支持 backdrop-filter 时退回不透明背景，否则吸顶后文字会和内容重叠糊在一起 */
+@supports not ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  header.header {
+    background: var(--theme);
+  }
 }
 
 .nav a {
@@ -139,16 +87,8 @@ html[data-theme="dark"] .profile .button:hover {
   color: var(--accent);
 }
 
-/* theme toggle button */
-#theme-toggle {
-  color: var(--primary);
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-#theme-toggle:hover {
-  color: var(--accent);
-  transform: rotate(15deg);
-}
+/* #theme-toggle 的样式全部在 theme-toggle-fix.css，
+   这里原来的 rotate(15deg) 和那边的 rotate(180deg) 会打架 */
 
 /* =====================================================
    Post Entry Cards
@@ -179,34 +119,39 @@ html[data-theme="dark"] .first-entry:hover {
   border-color: var(--tertiary);
 }
 
+/* 主题的 zmedia.css 在窄屏给 .first-entry 设了 min-height: 260px，
+   会把首页第一篇撑出一大块空白，这里覆盖掉 */
 .first-entry {
   min-height: auto;
   margin: 0 0 var(--gap) 0;
 }
 
 .first-entry .entry-header h1,
-.first-entry .entry-header h2 {
-  font-size: 1.35rem;
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--primary);
-}
-
+.first-entry .entry-header h2,
 .post-entry .entry-header h2 {
-  font-size: 1.35rem;
+  font-size: 1.2rem;
   font-weight: 600;
   line-height: 1.4;
   color: var(--primary);
+  margin-bottom: 0.4em;
 }
 
-.post-entry .entry-content {
+.post-entry .entry-content,
+.first-entry .entry-content {
   color: var(--secondary);
-  line-height: 1.7;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
-.post-entry .entry-footer {
+.post-entry .entry-footer,
+.first-entry .entry-footer {
   color: var(--secondary);
-  font-size: 0.875rem;
+  font-size: 0.85rem;
+  margin-top: 0.6em;
+}
+
+.main .list {
+  margin-top: 0;
 }
 
 .entry-hint {
@@ -323,10 +268,9 @@ html[data-theme="dark"] .pagination .current {
   text-decoration-color: var(--accent-hover);
 }
 
-.post-content pre {
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-}
+/* 代码块的圆角/内边距/背景在 article-enhancement.css，
+   这里原来又设了一次 border-radius: var(--radius-sm)（8px），
+   把那边的 12px 盖掉了 */
 
 .post-content code {
   background: var(--code-bg);
@@ -348,33 +292,13 @@ html[data-theme="dark"] .post-content blockquote {
   color: var(--content);
 }
 
-.copy-code {
-  background: var(--tertiary);
-  color: var(--primary);
-  border-radius: var(--radius-sm);
-  padding: 0.25rem 0.6rem;
-  font-size: 0.8rem;
-  transition: all 0.2s ease;
-}
-
-.copy-code:hover {
-  background: var(--accent);
-  color: #fff;
-}
-
-html[data-theme="dark"] .copy-code:hover {
-  color: #0f172a;
-}
+/* .copy-code 的样式统一在 feature-enhancements.css */
 
 /* =====================================================
    Table of Contents
    ===================================================== */
 
-:root {
-    --nav-width: 1380px;
-    --article-width: 650px;
-    --toc-width: 300px;
-}
+/* --nav-width / --article-width / --toc-width 已统一挪到 theme-vars-override.css */
 
 .toc {
     margin: 0 2px 40px 2px;
@@ -426,7 +350,7 @@ html[data-theme="dark"] .copy-code:hover {
 }
 
 .toc ul {
-    list-style-type: circle;
+    list-style-type: none;
 }
 
 .toc .inner {
@@ -497,21 +421,7 @@ html[data-theme="dark"] .copy-code:hover {
   color: var(--accent);
 }
 
-/* =====================================================
-   Reading Progress Bar
-   ===================================================== */
-
-#reading-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-hover));
-    width: 0%;
-    z-index: 1000;
-    transition: width 0.1s linear;
-    box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.5);
-}
+/* #reading-progress 的样式统一在 feature-enhancements.css */
 
 /* =====================================================
    Comments placeholder
@@ -531,9 +441,17 @@ html[data-theme="dark"] .copy-code:hover {
    Medium Zoom Overlay
    ===================================================== */
 
+/* medium-zoom 自带的 overlay 是 z-index: 99、放大后的图是 100，
+   都低于/等于吸顶导航栏的 100，看图时导航栏会压在遮罩上面。
+   这里抬到导航栏之上。 */
 .medium-zoom-overlay {
+  z-index: 1050;
   background: rgba(255, 255, 255, 0.85) !important;
   backdrop-filter: blur(4px);
+}
+
+.medium-zoom-image--opened {
+  z-index: 1051;
 }
 
 html[data-theme="dark"] .medium-zoom-overlay {
@@ -541,17 +459,19 @@ html[data-theme="dark"] .medium-zoom-overlay {
 }
 
 /* 路径相对于编译后的 stylesheet（/assets/css/stylesheet.<hash>.css），
-   ../../cursors/ 即 static/cursors/，不受 baseURL 子目录影响 */
-.win11 {
-  .medium-zoom-image {
-    cursor: url(../../cursors/zoom-in.svg) 12 12, zoom-in !important;
-  }
-  .medium-zoom--opened .medium-zoom-overlay {
-    cursor: url(../../cursors/zoom-out.svg) 12 12, zoom-out !important;
-  }
-  .medium-zoom-image--opened {
-    cursor: url(../../cursors/zoom-out.svg) 12 12, zoom-out !important;
-  }
+   ../../cursors/ 即 static/cursors/，不受 baseURL 子目录影响。
+   原来这里用的是 CSS 原生嵌套（.win11 { .medium-zoom-image { ... } }），
+   Hugo 只做拼接压缩、不跑 Sass，旧浏览器不认嵌套会整块丢掉，改成平铺。 */
+.win11 .medium-zoom-image {
+  cursor: url(../../cursors/zoom-in.svg) 12 12, zoom-in !important;
+}
+
+.win11 .medium-zoom--opened .medium-zoom-overlay {
+  cursor: url(../../cursors/zoom-out.svg) 12 12, zoom-out !important;
+}
+
+.win11 .medium-zoom-image--opened {
+  cursor: url(../../cursors/zoom-out.svg) 12 12, zoom-out !important;
 }
 
 /* =====================================================

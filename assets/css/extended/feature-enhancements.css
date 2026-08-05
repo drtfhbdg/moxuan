@@ -1,0 +1,349 @@
+/* ============================================
+   功能增强 - 样式
+   ============================================ */
+
+/* ============================================
+   字体大小控制器
+   ============================================ */
+
+.font-size-controller {
+    position: fixed;
+    right: 24px;
+    bottom: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 100;
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 0.3s ease;
+}
+
+/* 文章页面才显示 */
+.post-single ~ * .font-size-controller,
+body:has(.post-single) .font-size-controller {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.font-size-controller button {
+    width: 44px;
+    height: 44px;
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.font-size-controller button:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    transform: scale(1.1);
+    box-shadow: 0 4px 16px rgba(var(--accent-rgb), 0.3);
+}
+
+.font-size-controller button:active {
+    transform: scale(0.95);
+}
+
+html[data-theme="dark"] .font-size-controller button {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .font-size-controller button:hover {
+    color: var(--theme);
+}
+
+/* ============================================
+   复制代码提示 Toast
+   ============================================ */
+
+.copy-toast {
+    position: fixed;
+    top: 100px;
+    right: 24px;
+    background: var(--accent);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(var(--accent-rgb), 0.4);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateX(400px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+.copy-toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+html[data-theme="dark"] .copy-toast {
+    color: var(--theme);
+}
+
+.copy-toast svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ============================================
+   目录激活状态优化
+   ============================================ */
+
+.toc a.active {
+    color: var(--accent);
+    font-weight: 700;
+    background: var(--accent-light);
+    padding-left: 0.75em;
+    border-left: 3px solid var(--accent);
+}
+
+/* ============================================
+   阅读进度条增强
+   ============================================ */
+
+#reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+    width: 0%;
+    z-index: 1000;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.6);
+}
+
+/* 添加脉动效果 */
+#reading-progress::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    filter: blur(5px);
+    animation: progressGlow 2s ease-in-out infinite;
+}
+
+@keyframes progressGlow {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* #theme-toggle 的样式统一在 theme-toggle-fix.css */
+
+/* ============================================
+   返回顶部按钮增强
+   ============================================ */
+
+#top-link {
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(var(--accent-rgb), 0.3);
+    transition: all 0.3s ease;
+    border: none;
+}
+
+#top-link:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(var(--accent-rgb), 0.4);
+}
+
+#top-link svg {
+    fill: currentColor;
+}
+
+html[data-theme="dark"] #top-link {
+    color: var(--theme);
+}
+
+/* ============================================
+   代码复制按钮增强
+   ============================================ */
+
+.copy-code {
+    background: var(--tertiary);
+    color: var(--primary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.post-content pre:hover .copy-code {
+    opacity: 1;
+}
+
+.copy-code:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    transform: scale(1.05);
+}
+
+html[data-theme="dark"] .copy-code:hover {
+    color: var(--theme);
+}
+
+/* ============================================
+   外部链接标识
+   ============================================ */
+
+.post-content a[target="_blank"]::after {
+    content: "↗";
+    font-size: 0.8em;
+    margin-left: 0.2em;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.post-content a[target="_blank"]:hover::after {
+    opacity: 1;
+}
+
+/* ============================================
+   平滑滚动增强
+   ============================================ */
+
+html {
+    scroll-behavior: smooth;
+    /* 吸顶导航栏 60px + 一点余量，锚点跳转时标题才不会被导航栏挡住 */
+    scroll-padding-top: calc(var(--header-height) + 16px);
+}
+
+/* ============================================
+   加载骨架屏（可选）
+   ============================================ */
+
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--entry) 0%,
+        var(--border) 50%,
+        var(--entry) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ============================================
+   响应式调整
+   ============================================ */
+
+@media (max-width: 768px) {
+    .font-size-controller {
+        right: 16px;
+        bottom: 80px;
+        gap: 6px;
+    }
+
+    .font-size-controller button {
+        width: 40px;
+        height: 40px;
+        font-size: 12px;
+    }
+
+    .copy-toast {
+        right: 16px;
+        top: 80px;
+        font-size: 13px;
+        padding: 10px 16px;
+    }
+
+    #reading-progress {
+        height: 2px;
+    }
+}
+
+/* ============================================
+   打印时隐藏功能按钮
+   ============================================ */
+
+@media print {
+    .font-size-controller,
+    .copy-toast,
+    #reading-progress,
+    #top-link {
+        display: none !important;
+    }
+}
+
+/* ============================================
+   性能优化
+   ============================================ */
+
+.font-size-controller,
+.copy-toast,
+#top-link {
+    will-change: transform, opacity;
+}
+
+/* 动画结束后移除 */
+.copy-toast:not(.show) {
+    will-change: auto;
+}
+
+/* ============================================
+   无障碍优化
+   ============================================ */
+
+.font-size-controller button:focus,
+#top-link:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* 减少动画（用户偏好） */
+@media (prefers-reduced-motion: reduce) {
+    .copy-toast,
+    .font-size-controller,
+    #reading-progress::after {
+        animation: none;
+        transition: none;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}

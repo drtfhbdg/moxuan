@@ -1,6 +1,21 @@
 <!-- Reading Progress Bar -->
 <div id="reading-progress"></div>
 
+<!-- Font Size Controller -->
+<div id="font-size-controller" class="font-size-controller">
+  <button id="font-decrease" title="缩小字体" aria-label="缩小字体">A-</button>
+  <button id="font-reset" title="重置字体" aria-label="重置字体">A</button>
+  <button id="font-increase" title="放大字体" aria-label="放大字体">A+</button>
+</div>
+
+<!-- Copy Code Toast -->
+<div id="copy-toast" class="copy-toast">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+    <path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/>
+  </svg>
+  <span>已复制到剪贴板</span>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js"
   integrity="sha512-9ZKhgaFdKlsELap/dGw3Iaz5Bj+Las0XXZiRKYZaN9QArg6FtkD5rULNmNH4rTCTFxjPiBGr3MX8smRADRorDA=="
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -36,7 +51,9 @@
     document.body.className += ' win11'
   }
 
+  // ============================================
   // Reading progress bar
+  // ============================================
   (function() {
     const progressBar = document.getElementById('reading-progress');
     if (!progressBar) return;
@@ -51,5 +68,173 @@
     window.addEventListener('scroll', updateProgress, { passive: true });
     window.addEventListener('resize', updateProgress);
     updateProgress();
+  })();
+
+  // ============================================
+  // Font Size Controller
+  // ============================================
+  (function() {
+    const fontController = document.getElementById('font-size-controller');
+    const postContent = document.querySelector('.post-content');
+    if (!fontController || !postContent) return;
+
+    const fontSizes = [14, 16, 18, 20, 22];
+    let currentIndex = 1; // 默认 16px
+
+    // 从 localStorage 读取用户偏好
+    const savedIndex = localStorage.getItem('fontSize');
+    if (savedIndex !== null) {
+      currentIndex = parseInt(savedIndex);
+      postContent.style.fontSize = fontSizes[currentIndex] + 'px';
+    }
+
+    document.getElementById('font-decrease').addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateFontSize();
+      }
+    });
+
+    document.getElementById('font-increase').addEventListener('click', () => {
+      if (currentIndex < fontSizes.length - 1) {
+        currentIndex++;
+        updateFontSize();
+      }
+    });
+
+    document.getElementById('font-reset').addEventListener('click', () => {
+      currentIndex = 1;
+      updateFontSize();
+    });
+
+    function updateFontSize() {
+      postContent.style.fontSize = fontSizes[currentIndex] + 'px';
+      localStorage.setItem('fontSize', currentIndex);
+    }
+  })();
+
+  // ============================================
+  // Enhanced Copy Code with Toast
+  // ============================================
+  (function() {
+    const copyButtons = document.querySelectorAll('.copy-code');
+    const toast = document.getElementById('copy-toast');
+
+    if (!toast) return;
+
+    copyButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // 显示提示
+        toast.classList.add('show');
+
+        // 2秒后隐藏
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2000);
+      });
+    });
+  })();
+
+  // ============================================
+  // TOC Floating Follow (侧边目录跟随)
+  // ============================================
+  (function() {
+    const toc = document.querySelector('.toc');
+    const tocLinks = document.querySelectorAll('.toc a');
+
+    if (!toc || tocLinks.length === 0) return;
+
+    // 获取所有标题
+    const headings = Array.from(document.querySelectorAll('.post-content h2, .post-content h3, .post-content h4'))
+      .filter(h => h.id);
+
+    function updateActiveToc() {
+      const scrollPos = window.scrollY + 100;
+
+      let currentHeading = null;
+      for (let i = headings.length - 1; i >= 0; i--) {
+        if (headings[i].offsetTop <= scrollPos) {
+          currentHeading = headings[i];
+          break;
+        }
+      }
+
+      // 移除所有 active 类
+      tocLinks.forEach(link => link.classList.remove('active'));
+
+      // 添加当前 active
+      if (currentHeading) {
+        const activeLink = document.querySelector(`.toc a[href="#${currentHeading.id}"]`);
+        if (activeLink) {
+          activeLink.classList.add('active');
+        }
+      }
+    }
+
+    window.addEventListener('scroll', updateActiveToc, { passive: true });
+    updateActiveToc();
+  })();
+
+  // ============================================
+  // Theme Toggle Animation
+  // ============================================
+  (function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    if (!themeToggle) return;
+
+    themeToggle.addEventListener('click', function() {
+      // 添加旋转动画类
+      this.style.transform = 'rotate(360deg)';
+      setTimeout(() => {
+        this.style.transform = 'rotate(0deg)';
+      }, 300);
+    });
+  })();
+
+  // ============================================
+  // Smooth Scroll for Anchor Links
+  // ============================================
+  (function() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href === '#' || href === '#top') return;
+
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const offsetTop = target.offsetTop - 80;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  })();
+
+  // ============================================
+  // Image Lazy Load Enhancement
+  // ============================================
+  (function() {
+    if ('loading' in HTMLImageElement.prototype) {
+      const images = document.querySelectorAll('img[loading="lazy"]');
+      images.forEach(img => {
+        img.src = img.dataset.src || img.src;
+      });
+    }
+  })();
+
+  // ============================================
+  // External Links - Open in New Tab
+  // ============================================
+  (function() {
+    const links = document.querySelectorAll('.post-content a[href^="http"]');
+    links.forEach(link => {
+      if (!link.href.includes(window.location.host)) {
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
+      }
+    });
   })();
 </script>

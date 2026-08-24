@@ -56,7 +56,7 @@ pagination:
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  description: "一个普通大学生的技术笔记，记录 Linux 运维、Web 开发和服务器踩坑的日常。内容涵盖 Nginx、Docker、MySQL、Cloudflare 和自建服务的实践经验。"
+  description: "一个学生的技术笔记，记录 Linux 运维、Web 开发和服务器踩坑的日常。内容涵盖 Nginx、Docker、MySQL、Cloudflare 和自建服务的实践经验。"
   author: Moxuan
   defaultTheme: light # 默认是暗色背景
   ShowShareButtons: false # 关闭分享的按钮
@@ -80,7 +80,7 @@ params:
   profileMode:
     enabled: true
     title: "Moxuan's Blog"
-    subtitle: "一个普通大学生的技术笔记，记录 Linux 运维、Web 开发和服务器踩坑的日常。"
+    subtitle: "一个学生的技术笔记，记录 Linux 运维、Web 开发和服务器踩坑的日常。"
     imageUrl: "/images/avatar.jpg"
     imageTitle: "Moxuan"
     imageWidth: 150
@@ -97,7 +97,7 @@ params:
       url: "index.xml"
     - name: email
       title: Send me an email
-      url: "mailto:blog@moxuan.xin"
+      url: "mailto:qij50172@gmail.com"
 
   # 搜索
   fuseOpts:

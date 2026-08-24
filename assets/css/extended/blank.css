@@ -478,26 +478,7 @@ html[data-theme="dark"] .medium-zoom-overlay {
    Archives / List Pages
    ===================================================== */
 
-.archive-year-header {
-  color: var(--primary);
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin: 2rem 0 1rem;
-}
-
-.archive-entry {
-  padding: 0.75rem 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.archive-entry a {
-  color: var(--primary);
-  font-weight: 500;
-}
-
-.archive-entry a:hover {
-  color: var(--accent);
-}
+/* 归档页的样式统一写在 components-enhancement.css，这里不再重复定义 */
 
 /* =====================================================
    Search Page

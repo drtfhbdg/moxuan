@@ -2,7 +2,7 @@
 title: "关于"
 layout: "about"
 url: "/about/"
-summary: "一个热爱折腾技术的普通大学生，记录 Linux 运维、Web 开发和服务器踩坑的日常。"
+summary: "一个热爱折腾技术的学生，记录 Linux 运维、Web 开发和服务器踩坑的日常。"
 date: 2024-01-01T00:00:00+08:00
 hidemeta: true
 comments: false
@@ -10,7 +10,7 @@ comments: false
 
 ## 👋 你好，我是 Moxuan
 
-一个热爱折腾技术的普通大学生，目前专注于 Linux 运维和 Web 开发。
+一个热爱折腾技术的学生，目前专注于 Linux 运维和 Web 开发。
 
 这个博客用来记录我在服务器运维、自建服务和开发过程中遇到的问题和解决方案。写博客的初衷很简单：一是给自己留个备忘录，二是希望这些踩坑经验能帮到和我遇到相同问题的人。
 
@@ -54,7 +54,7 @@ comments: false
 
 ## 📮 联系方式
 
-- **Email**: [blog@moxuan.xin](mailto:blog@moxuan.xin)
+- **Email**: [qij50172@gmail.com](mailto:qij50172@gmail.com)
 - **GitHub**: [@drtfhbdg](https://github.com/drtfhbdg)
 - **RSS**: [订阅本站](/index.xml)
 

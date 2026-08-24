@@ -278,29 +278,36 @@ html[data-theme="dark"] .card {
    归档页面优化
    ============================================ */
 
+/* 注意 DOM 结构：.archive-year 和 .archive-month 是容器，不是标题。
+   标题是 .archive-year-header / .archive-month-header。
+   往容器上写 font-size / color 会继承给里面的文章标题和日期。 */
+
 .archive-year {
-    font-size: 1.75em;
-    font-weight: 700;
-    color: var(--primary);
     margin: 2em 0 1em;
+}
+
+.archive-year-header {
     display: flex;
     align-items: center;
     gap: 0.5em;
+    font-size: 1.75em;
+    font-weight: 700;
+    color: var(--primary);
 }
 
-.archive-year::before {
+.archive-year-header::before {
     content: "";
+    flex: none;
     width: 4px;
-    height: 1.5em;
+    height: 1.2em;
     background: var(--accent);
     border-radius: 2px;
 }
 
-.archive-month {
+.archive-month-header {
     font-size: 1.25em;
     font-weight: 600;
     color: var(--secondary);
-    margin: 1.5em 0 0.75em;
 }
 
 .archive-posts {
@@ -309,13 +316,9 @@ html[data-theme="dark"] .card {
 }
 
 .archive-entry {
-    padding: 1em;
-    margin-bottom: 0.5em;
+    padding: 0.6em 1em;
     border-radius: 8px;
-    transition: all 0.2s ease;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .archive-entry:hover {
@@ -324,14 +327,14 @@ html[data-theme="dark"] .card {
 }
 
 .archive-entry-title {
+    margin: 0;
+    font-size: 1.05em;
     font-weight: 600;
+    line-height: 1.5;
 }
 
-.archive-entry-date {
-    color: var(--secondary);
-    font-size: 0.9em;
-    white-space: nowrap;
-    margin-left: 1em;
+.archive-meta {
+    margin-top: 0.2em;
 }
 
 /* 社交图标只出现在首页 profile 里，样式在 clean-minimal.css。
@@ -382,12 +385,6 @@ footer a:hover {
     }
 
     .archive-entry {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5em;
-    }
-
-    .archive-entry-date {
-        margin-left: 0;
+        padding: 0.5em 0.75em;
     }
 }
